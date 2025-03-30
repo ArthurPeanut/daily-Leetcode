@@ -52,7 +52,7 @@ export default function HomePage({ posts }: { posts: Post[] }) {
   
   return (
     <div className="max-w-3xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-4">Haoqing's Daily on Leetcode</h1>
+      <h1 className="text-3xl font-bold mb-4">Haoqing&apos;s Daily on Leetcode</h1>
       <p className="text-gray-600 mb-6">To strive, to seek, to find, and to yield.📈</p>
 
       <ProgressChart data={chartData} />
