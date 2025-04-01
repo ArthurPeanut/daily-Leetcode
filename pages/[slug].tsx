@@ -3,7 +3,6 @@ import path from 'path';
 import matter from 'gray-matter';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { remark } from 'remark';
-import html from 'remark-html';
 import rehypeHighlight from 'rehype-highlight';
 import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
