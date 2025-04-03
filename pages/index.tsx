@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import Link from 'next/link';
-import ProgressChart from '../components/ProgressChart';
+import NoticeBoard from '../components/NoticeBoard';
 import { useState } from 'react';
 import Image from 'next/image';
 
@@ -60,10 +60,11 @@ export default function HomePage({ posts }: { posts: Post[] }) {
       <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* 主体内容区 */}
         <div className="md:col-span-3">
-          <h1 className="text-3xl font-bold mb-2">Haoqing&apos;s Coding Daily</h1>
+          <h1 className="text-3xl font-extrabold text-gray-900 mb-2">Haoqing&apos;s Coding Daily</h1>
           <p className="text-gray-600 mb-6">To strive, to seek, to find, and not to yield. 📈</p>
 
-          <ProgressChart data={chartData} />
+          <NoticeBoard />
+
 
           {/* 筛选按钮 */}
           <div className="flex gap-4 my-6">
@@ -83,12 +84,12 @@ export default function HomePage({ posts }: { posts: Post[] }) {
           {/* 文章列表 */}
           {filteredPosts.map((post) => (
             <div key={post.slug} className="mb-6 border-b pb-4 bg-white rounded-xl shadow-sm p-4">
-              <h2 className="text-xl font-semibold">
+              <h2 className="text-xl font-semibold text-gray-700">
                 <Link href={`/${post.slug}`}>{post.title}</Link>
               </h2>
               <p className="text-sm text-gray-500">{post.date}</p>
-              <p className="mt-1 text-sm text-gray-700">标签：{post.tags.join(', ')}</p>
-              <p className="mt-1 text-sm text-gray-500 italic">类型：{post.type}</p>
+              <p className="mt-1 text-sm text-gray-700">Tag：{post.tags.join(', ')}</p>
+              <p className="mt-1 text-sm text-gray-500 italic">Type：{post.type}</p>
             </div>
           ))}
         </div>
@@ -105,7 +106,7 @@ export default function HomePage({ posts }: { posts: Post[] }) {
                 height={100}
                 className="rounded-full mb-4"
               />
-              <h2 className="text-lg font-semibold">Haoqing Liu</h2>
+              <h2 className="text-lg font-semibold text-gray-700">Haoqing Liu</h2>
               <p className="text-sm text-gray-600 mb-2">🎓 Master of Computing @ ANU</p>
               <p className="text-sm text-gray-600 mb-2">🎓 Bachelor of CS @ SYSU</p>
               <p className="text-sm text-gray-600 mb-4">👨‍💻 Passionate about algorithms, Computer Vision & Full stack development.</p>

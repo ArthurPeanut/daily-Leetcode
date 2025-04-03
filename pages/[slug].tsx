@@ -3,11 +3,14 @@ import path from 'path';
 import matter from 'gray-matter';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { remark } from 'remark';
-import rehypeHighlight from 'rehype-highlight';
+import remarkGfm from 'remark-gfm';
 import remarkRehype from 'remark-rehype';
+import rehypeHighlight from 'rehype-highlight';
 import rehypeStringify from 'rehype-stringify';
-import 'highlight.js/styles/github.css'; // 语法高亮样式
+import 'highlight.js/styles/github.css';
 import Link from 'next/link';
+import rehypeRaw from 'rehype-raw';
+
 
 type Props = {
   title: string;
@@ -19,7 +22,6 @@ export default function PostPage({ title, date, contentHtml }: Props) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-100 via-white to-purple-100 py-12">
       <div className="max-w-3xl mx-auto bg-white text-black p-8 rounded-2xl shadow-xl">
-        {/* 返回首页按钮 */}
         <div className="mb-4">
           <Link
             href="/"
@@ -33,9 +35,10 @@ export default function PostPage({ title, date, contentHtml }: Props) {
         <p className="text-gray-500 mb-6">{date}</p>
 
         <div
-          className="prose prose-lg max-w-none prose-pre:bg-gray-900 prose-pre:text-white prose-code:text-pink-600"
+          className="prose prose-lg max-w-none prose-headings:text-gray-900 ..."
           dangerouslySetInnerHTML={{ __html: contentHtml }}
         />
+
       </div>
     </div>
   );
@@ -62,10 +65,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { data, content } = matter(fileContents);
 
   const processedContent = await remark()
-    .use(remarkRehype)
+    .use(remarkGfm)
+    .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeHighlight)
-    .use(rehypeStringify)
+    .use(rehypeStringify, { allowDangerousHtml: true })
     .process(content);
+
 
   const contentHtml = processedContent.toString();
 
