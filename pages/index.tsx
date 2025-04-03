@@ -50,10 +50,6 @@ export default function HomePage({ posts }: { posts: Post[] }) {
     dailyCount[post.date] = (dailyCount[post.date] || 0) + 1;
   });
 
-  const chartData = Object.entries(dailyCount).map(([date, count]) => ({
-    date,
-    count,
-  }));
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-100 via-white to-purple-100">
